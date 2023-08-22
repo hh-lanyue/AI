@@ -1,0 +1,1 @@
+%SystemRoot%;%SystemRoot%\system32;%SystemRoot%\System32\Wbem;%SYSTEMROOT%\System32\OpenSSH\;D:\public\git\Git\cmd;D:\public\git\Git\bin;C:\Program Files\dotnet\;%JAVA_HOME%\bin;E:\school\AI\AI\projects\python;E:\school\AI\AI\projects\python\Scripts

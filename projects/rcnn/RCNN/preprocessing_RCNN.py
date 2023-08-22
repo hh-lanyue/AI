@@ -135,7 +135,7 @@ def load_from_npy(data_set):
     data_list = os.listdir(data_set)
     # random.shuffle(data_list)
     for ind, d in enumerate(data_list):
-        i, l = np.load(os.path.join(data_set, d))
+        i, l = np.load(os.path.join(data_set, d), allow_pickle=True)
         images.extend(i)
         labels.extend(l)
         tools.view_bar("load data of %s" % d, ind + 1, len(data_list))
