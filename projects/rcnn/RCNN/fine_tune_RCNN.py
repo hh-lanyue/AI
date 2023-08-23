@@ -9,8 +9,7 @@ from tflearn.layers.normalization import local_response_normalization
 from tflearn.layers.estimator import regression
 
 
-
-# Use an already trained alexnet with the last layer redesigned
+# Use a already trained alexnet with the last layer redesigned
 def create_alexnet(num_classes, restore=False):
     # Building 'AlexNet'
     network = input_data(shape=[None, config.IMAGE_SIZE, config.IMAGE_SIZE, 3])
@@ -59,11 +58,6 @@ def fine_tune_Alexnet(network, X, Y, save_model_path, fine_tune_model_path):
 
 
 if __name__ == '__main__':
-    # 1 默认，显示所有信息
-    # 2 只显示 warning 和 Error
-    # 3 只显示 Error
-    os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
-
     data_set = config.FINE_TUNE_DATA
     if len(os.listdir(config.FINE_TUNE_DATA)) == 0:
         print("Reading Data")

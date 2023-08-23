@@ -115,13 +115,8 @@ def train_svms(train_file_folder, model):
 
 
 if __name__ == '__main__':
-    # 1 默认，显示所有信息
-    # 2 只显示 warning 和 Error
-    # 3 只显示 Error
-    os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
-
     train_file_folder = config.TRAIN_SVM
-    img_path = './17flowers/jpg/15/image_1201.jpg'  # or './17flowers/jpg/16/****.jpg'
+    img_path = './17flowers/jpg/7/image_0591.jpg'  # or './17flowers/jpg/16/****.jpg'
     imgs, verts = image_proposal(img_path)
     tools.show_rect(img_path, verts)
 
