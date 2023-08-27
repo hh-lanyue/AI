@@ -1,0 +1,24 @@
+1 No moudle named ‘pip’
+python -m ensurepip
+
+2 更新 pip
+python -m pip install --upgrade pip
+
+3 安装 cv2 模块
+pip install opencv-python --verbose
+
+4 Could not build wheels for opencv-python, which is required to install pyproject.toml-based projects
+4.1 pip install cmake
+4.2 到网址 https://pypi.tuna.tsinghua.edu.cn/simple/opencv-python/ 下载对应的版本，例如 opencv_python-3.4.10.35-cp36-cp36m-win_amd64.whl
+4.3 pip install opencv_python-3.4.10.35-cp36-cp36m-win_amd64.whl
+
+5 failed call to cuInit: UNKNOWN ERROR (303)
+pip uninstall tensorflow
+pip install tensorflow-cpu
+
+
+
+
+
+
+
