@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-.idea
-*.log
-.npy
-=======
 # python
 *.pyd
 *.log
@@ -15,4 +10,3 @@ libs/
 # java
 .idea
 *.class
->>>>>>> dce46ef7 (添加忽略文件)
