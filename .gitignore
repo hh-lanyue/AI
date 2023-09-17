@@ -6,6 +6,7 @@ venv/
 lib/
 libs/
 /log
+/__pycache__
 
 # java
 .idea
