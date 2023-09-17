@@ -1,12 +1,12 @@
 # python
 *.pyd
 *.log
-/node_modules
-venv/
-lib/
+node_modules/
 libs/
-/log
-/__pycache__
+lib/
+log/
+venv/
+__pycache__/
 
 # java
 .idea
