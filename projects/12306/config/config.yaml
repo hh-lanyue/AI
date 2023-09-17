@@ -1,0 +1,38 @@
+url :
+  check_url : 'https://kyfw.12306.cn/passport/web/checkLoginVerify'
+  login_url : 'https://kyfw.12306.cn/passport/web/login'
+  user_login_url : 'https://kyfw.12306.cn/otn/login/userLogin'
+  query_ticket_url : 'https://kyfw.12306.cn/otn/leftTicket/queryZ'
+
+headers :
+  Connection : 'keep-alive'
+  Content-Type : 'application/x-www-form-urlencoded; charset=UTF-8'
+  User-Agent : 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36'
+
+# 登录信息
+login :
+  # 用户名
+  username : '18132094376'
+  # 密码
+  password : 'lanyue0910'
+  # appid
+  appid : 'otn'
+
+# 查询
+query :
+  # 出发日期
+  train_date : '2023-09-30'
+  from_station : 'SJP'
+  to_station : 'SYT'
+  purpose_codes : 'ADULT'
+
+# 购买信息
+buy :
+  # 出发地
+  from_station : '石家庄'
+  # 目的地
+  to_station : '高平东'
+  # 出发日期
+  train_date : '2023-09-25'
+  # 车次
+  train_number : 'K268'
