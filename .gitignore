@@ -4,6 +4,8 @@
 node_modules/
 libs/
 lib/
+Lib/
+Scripts/
 log/
 venv/
 __pycache__/
