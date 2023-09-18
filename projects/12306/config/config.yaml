@@ -3,6 +3,7 @@ url :
   login_url : 'https://kyfw.12306.cn/passport/web/login'
   user_login_url : 'https://kyfw.12306.cn/otn/login/userLogin'
   query_ticket_url : 'https://kyfw.12306.cn/otn/leftTicket/queryZ'
+  buy_pre_submit_order_url : 'https://kyfw.12306.cn/otn/leftTicket/submitOrderRequest'
 
 headers :
   Connection : 'keep-alive'
@@ -21,18 +22,20 @@ login :
 # 查询
 query :
   # 出发日期
-  train_date : '2023-09-30'
+  train_date : '2023-09-20'
   from_station : 'SJP'
-  to_station : 'SYT'
+  to_station : 'BXP'
   purpose_codes : 'ADULT'
 
 # 购买信息
 buy :
-  # 出发地
-  from_station : '石家庄'
-  # 目的地
-  to_station : '高平东'
-  # 出发日期
-  train_date : '2023-09-25'
-  # 车次
-  train_number : 'K268'
+  # 购买前-获取车票详情
+  pre:
+    # 出发日期
+    train_date: '2023-09-20'
+    # 出发地
+    query_from_station_name : '石家庄'
+    # 目的地
+    query_to_station_name : '北京西'
+    # 成人/儿童票标识
+    purpose_codes : 'ADULT'

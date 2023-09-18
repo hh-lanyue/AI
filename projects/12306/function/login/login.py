@@ -1,4 +1,5 @@
-import requests, json
+import json
+from function.session.session_manger import session
 from domain.url_data import url_data
 from domain.headers_data import headers_data
 from domain.pre_login_data import pre_login_data
@@ -14,15 +15,13 @@ class login:
         self.login_url = url_data.get('login_url')
         # 用户登录地址
         self.user_login_url = url_data.get('user_login_url')
-        # 配置信息
-        self.session = requests.session()
         # 读取 Cookie
         self.my_cookie = ''
 
     # 登录前校验
     def pre_login(self):
         # 发送登录请求
-        response = self.session.post(self.check_url, headers=headers_data, data=pre_login_data)
+        response = session.post(self.check_url, headers=headers_data, data=pre_login_data)
 
         if response.status_code == 200:
             try:
@@ -56,7 +55,7 @@ class login:
 
     def do_login(self):
         # 发送登录请求
-        response = self.session.post(self.login_url, headers=headers_data, data=login_data)
+        response = session.post(self.login_url, headers=headers_data, data=login_data)
         if response.status_code == 200:
             try:
                 res_data = json.loads(response.text)
@@ -81,10 +80,10 @@ class login:
 
     def user_login(self):
         # 发送登录请求，会引发重定向
-        response = self.session.get(url=self.user_login_url, headers=headers_data)
+        response = session.get(url=self.user_login_url, headers=headers_data)
         # 获取重定向地址
         redirect_url = response.url
-        response = self.session.get(redirect_url, headers=headers_data)
+        response = session.get(redirect_url, headers=headers_data)
         if response.ok:
             print('登录成功')
             file_cookie = open('config/cookie.txt', 'a', encoding="UTF-8")

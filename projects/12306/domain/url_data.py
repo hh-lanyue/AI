@@ -9,5 +9,6 @@ url_data = {
     'check_url': data['url']['check_url'],
     'login_url': data['url']['login_url'],
     'user_login_url': data['url']['user_login_url'],
-    'query_ticket_url' : data['url']['query_ticket_url']
+    'query_ticket_url' : data['url']['query_ticket_url'],
+    'buy_pre_submit_order_url' : data['url']['buy_pre_submit_order_url']
 }
