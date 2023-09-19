@@ -1,4 +1,4 @@
-import json
+import json, tools.train_tool as train_tool
 from function.session.session_manger import session
 from domain.url_data import url_data
 from domain.headers_data import headers_data
@@ -15,6 +15,8 @@ class buy:
 
     # 查询车票详情
     def pre_buy_submit_order(self):
+        train_key = train_tool.get_train_key()
+        buy_pre_submit_order_data['secretStr'] = train_key
         response = session.post(self.buy_pre_submit_order_url, headers=headers_data, data=buy_pre_submit_order_data)
         if response.status_code == 200:
             try:
@@ -27,16 +29,13 @@ class buy:
                 file_error.close()
                 print(e)
             else:
-                print(res_data)
+                if res_data['status']:
+                    print('购票成功')
+                else:
+                    print('购票失败')
+                    print(res_data['messages'])
         else:
             print('购票失败')
-
-    # 从文件加载 cookie
-    def load_cookie(self):
-        file_cookie = open('config/cookie.txt', 'r', encoding="UTF-8")
-        self.my_cookie = file_cookie.read()
-        file_cookie.close()
-        return self.my_cookie
 
     def init_buy(self):
         self.pre_buy_submit_order()

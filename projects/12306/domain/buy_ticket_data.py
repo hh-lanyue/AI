@@ -1,11 +1,11 @@
-import config
-
+from config import config
+from root.root_path import root_path
 
 # 设置配置文件路径
-data = config.read_yaml("config/config.yaml")
+config_data = config.read_yaml(root_path + '\\' + "config\\config.yaml")
 # 读取配置文件信息
 buy_ticket_data = {
-    'username': data['login']['username'],
-    'password': data['login']['password'],
-    'appid': data['login']['appid']
+    'username': config_data['login']['username'],
+    'password': config_data['login']['password'],
+    'appid': config_data['login']['appid']
 }

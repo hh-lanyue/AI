@@ -65,6 +65,8 @@ for train in res_data['data']['result']:
         file_train_key.close()
 print('=========================================')
 
+data4['secretStr'] = train_key
+print(data4.get('secretStr'))
 response = session.post(url=url4, headers=headers, data=data4)
 print(response.text)
 print('=========================================')
