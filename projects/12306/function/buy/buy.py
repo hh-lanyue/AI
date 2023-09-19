@@ -1,5 +1,5 @@
 import json, tools.train_tool as train_tool
-from function.session.session_manger import session
+from tools.session_tool import session
 from domain.url_data import url_data
 from domain.headers_data import headers_data
 from domain.buy_pre_submit_order_data import buy_pre_submit_order_data
@@ -33,7 +33,7 @@ class buy:
                     print('购票成功')
                 else:
                     print('购票失败')
-                    print(res_data['messages'])
+                    print(res_data)
         else:
             print('购票失败')
 

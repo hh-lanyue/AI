@@ -1,5 +1,5 @@
 import json, tools.cookie_tool as cookie_tool, tools.error_tools as error_tools
-from function.session.session_manger import session
+from tools.session_tool import session
 from domain.url_data import url_data
 from domain.headers_data import headers_data
 from domain.pre_login_data import pre_login_data

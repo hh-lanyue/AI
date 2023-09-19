@@ -1,5 +1,4 @@
-from function.session.session_manger import session
-from function.query.query_tickets import query_tickets
+from tools.session_tool import session
 import json
 
 

@@ -1,5 +1,5 @@
 import json, tools.error_tools as error_tools, tools.train_tool as train_tool
-from function.session.session_manger import session
+from tools.session_tool import session
 from domain.url_data import url_data
 from domain.headers_data import headers_data
 from domain.get_tickets_data import get_tickets_data
