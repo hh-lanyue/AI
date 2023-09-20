@@ -5,6 +5,10 @@ url:
   user_login_url: 'https://kyfw.12306.cn/otn/login/userLogin'
   query_ticket_url: 'https://kyfw.12306.cn/otn/leftTicket/queryZ'
   buy_pre_submit_order_url: 'https://kyfw.12306.cn/otn/leftTicket/submitOrderRequest'
+  buy_pre_buy_select_seat_init_dc_url: 'https://kyfw.12306.cn/otn/confirmPassenger/initDc'
+  buy_pre_get_passenger_info_url: 'https://kyfw.12306.cn/otn/confirmPassenger/getPassengerDTOs'
+  buy_pre_check_order_info_url: 'https://kyfw.12306.cn/otn/confirmPassenger/checkOrderInfo'
+  buy_pre_get_queue_count_url: 'https://kyfw.12306.cn/otn/confirmPassenger/getQueueCount'
 
 # 请求头
 headers:
@@ -15,7 +19,7 @@ headers:
 # 登录信息
 login:
   # 用户名
-  username: '18132094376'
+  username: '18121177504'
   # 密码
   password: 'lanyue0910'
   # appid
@@ -24,7 +28,7 @@ login:
 # 查询
 query:
   # 出发日期
-  train_date: '2023-09-20'
+  train_date: '2023-09-26'
   from_station: 'SJP'
   to_station: 'BXP'
   purpose_codes: 'ADULT'
@@ -34,7 +38,7 @@ buy:
   # 购买前-获取车票详情
   pre:
     # 出发日期
-    train_date: '2023-09-20'
+    train_date: '2023-09-26'
     # 出发地
     query_from_station_name: '石家庄'
     # 目的地
