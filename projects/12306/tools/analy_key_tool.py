@@ -50,7 +50,7 @@ def analy_passenger_key(passenger_data):
         passenger_list_info = passenger_data['data']['normal_passengers']
         for passenger_info in passenger_list_info:
             if passenger_info['passenger_name'] == user_name:
-                file_tool.write_content_to_file(config_path.passenger_key, json.dumps(passenger_info))
+                file_tool.write_content_to_file(config_path.passenger_key, json.dumps(passenger_info), is_cls=True)
     except Exception as e:
         print('解析 乘客密钥 失败，用户未登录')
         print(e)
@@ -65,3 +65,9 @@ def analy_passenger_key_to_obj():
 def analy_global_token_to_obj():
     global_token = file_tool.read_file(config_path.global_token)
     return global_token
+
+
+def analy_ticket_form_to_obj():
+    ticket_form = file_tool.read_file(config_path.ticket_form)
+    result_data = ticket_form.replace(" ", "").replace("\t", "").replace("\n", "").replace('\'', '\"')
+    return json.loads(result_data)

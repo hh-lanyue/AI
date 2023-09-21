@@ -1,11 +1,12 @@
 from config import config
 from root.root_path import root_path
-from tools.analy_key_tool import analy_passenger_key_to_obj, analy_global_token_to_obj
+from tools import analy_key_tool
 
 # 设置配置文件路径
 config_data = config.read_yaml(root_path + '\\' + "config\\config.yaml")
-global_token = analy_global_token_to_obj()
-passenger_key = analy_passenger_key_to_obj()
+# 请求参数关键信息
+global_token = analy_key_tool.analy_global_token_to_obj()
+passenger_key = analy_key_tool.analy_passenger_key_to_obj()
 
 # 读取配置文件信息
 buy_pre_check_order_info_data = {
