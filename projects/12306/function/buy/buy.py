@@ -1,6 +1,5 @@
 import json, tools.cookie_tool as cookie_tool
 from tools.session_tool import session
-from tools.html_analy_tool import analy_html_file
 from domain.url_data import url_data
 from domain.headers_data import headers_data
 from domain.buy_pre_submit_order_data import buy_pre_submit_order_data
@@ -10,6 +9,7 @@ from domain.buy_pre_get_queue_count_data import buy_pre_get_queue_count_data
 from domain.buy_pre_buy_select_seat_init_dc_data import buy_pre_buy_select_seat_init_dc_data
 from tools import post_data_to_url_tool
 from tools.file_tool import write_content_to_file
+from tools.analy_key_tool import analy_init_dc, analy_passenger_key
 from config import config_path
 
 
@@ -40,9 +40,6 @@ class buy:
                 print(e)
             else:
                 if res_data['status']:
-                    # set_cookie = response.headers['Set-Cookie']
-                    # cookie_tool.write_cookie(set_cookie)
-                    # print(set_cookie)
                     print('预订票成功')
                 else:
                     print('预订票失败')
@@ -56,7 +53,7 @@ class buy:
         if response.status_code == 200:
             if response.ok:
                 write_content_to_file(file_path=config_path.file_init_dc, content=response.text, is_cls=True)
-                analy_html_file(file_path=config_path.file_init_dc)
+                analy_init_dc()
                 print('预订选座成功')
         else:
             print('预订选座失败')
@@ -76,6 +73,7 @@ class buy:
             else:
                 if res_data['status']:
                     if res_data['data']['isExist']:
+                        analy_passenger_key(res_data)
                         print('获取乘客信息成功')
                     else:
                         print(res_data['data']['exMsg'])
@@ -103,7 +101,6 @@ class buy:
                     print('订单信息校验失败')
                 else:
                     print('订单信息校验成功')
-                    print(res_data)
         else:
             print('订单信息校验失败')
 
@@ -132,6 +129,6 @@ class buy:
     def init_buy(self):
         self.pre_buy_submit_order()
         self.buy_pre_buy_select_seat_init_dc()
-        # self.buy_pre_get_passenger_info()
-        # self.buy_pre_get_check_order_info()
-        # self.buy_pre_get_queue_count()
+        self.buy_pre_get_passenger_info()
+        self.buy_pre_get_check_order_info()
+        self.buy_pre_get_queue_count()

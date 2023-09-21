@@ -32,6 +32,7 @@ query:
   from_station: 'SJP'
   to_station: 'BXP'
   purpose_codes: 'ADULT'
+  user_name: '胡海'
 
 # 购买信息
 buy:
