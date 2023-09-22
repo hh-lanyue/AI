@@ -11,7 +11,7 @@ train_key = train_tool.get_train_key()
 buy_pre_submit_order_data = {
     'secretStr': train_key,
     'train_date': config_data['buy']['pre']['train_date'],
-    'back_train_date': '2023-09-18',
+    'back_train_date': '2023-09-25',
     'tour_flag': 'dc',
     'purpose_codes': config_data['buy']['pre']['purpose_codes'],
     'query_from_station_name': config_data['buy']['pre']['query_from_station_name'],

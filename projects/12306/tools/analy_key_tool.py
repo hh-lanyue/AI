@@ -68,6 +68,12 @@ def analy_global_token_to_obj():
 
 
 def analy_ticket_form_to_obj():
+    result_data = {}
     ticket_form = file_tool.read_file(config_path.ticket_form)
-    result_data = ticket_form.replace(" ", "").replace("\t", "").replace("\n", "").replace('\'', '\"')
-    return json.loads(result_data)
+    json_data = ticket_form.replace(" ", "").replace("\t", "").replace("\n", "").replace('\'', '\"')
+    try:
+        result_data = json.loads(json_data)
+    except Exception as e:
+        print('解析 车票信息 失败，用户未登录')
+        print(e)
+    return result_data

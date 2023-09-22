@@ -33,7 +33,7 @@ class query_tickets:
                         # 注意放开 BEG
                         for train in res_data['data']['result']:
                             li = list(train.split("|"))
-                            if li[3] == 'G654':
+                            if li[3] == 'G572':
                                 train_key = li[0]
                                 train_tool.record_train_key(train_key)
                         # 注意放开 END

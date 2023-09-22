@@ -9,6 +9,7 @@ url:
   buy_pre_get_passenger_info_url: 'https://kyfw.12306.cn/otn/confirmPassenger/getPassengerDTOs'
   buy_pre_check_order_info_url: 'https://kyfw.12306.cn/otn/confirmPassenger/checkOrderInfo'
   buy_pre_get_queue_count_url: 'https://kyfw.12306.cn/otn/confirmPassenger/getQueueCount'
+  buy_submit_order_url: 'https://kyfw.12306.cn/otn/confirmPassenger/confirmSingleForQueue'
 
 # 请求头
 headers:
@@ -28,7 +29,7 @@ login:
 # 查询
 query:
   # 出发日期
-  train_date: '2023-09-26'
+  train_date: '2023-09-25'
   from_station: 'SJP'
   to_station: 'BXP'
   purpose_codes: 'ADULT'
@@ -39,7 +40,7 @@ buy:
   # 购买前-获取车票详情
   pre:
     # 出发日期
-    train_date: '2023-09-26'
+    train_date: '2023-09-25'
     # 出发地
     query_from_station_name: '石家庄'
     # 目的地

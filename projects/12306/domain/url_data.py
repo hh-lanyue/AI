@@ -15,5 +15,6 @@ url_data = {
     'buy_pre_buy_select_seat_init_dc_url': config_data['url']['buy_pre_buy_select_seat_init_dc_url'],
     'buy_pre_get_passenger_info_url': config_data['url']['buy_pre_get_passenger_info_url'],
     'buy_pre_check_order_info_url': config_data['url']['buy_pre_check_order_info_url'],
-    'buy_pre_get_queue_count_url': config_data['url']['buy_pre_get_queue_count_url']
+    'buy_pre_get_queue_count_url': config_data['url']['buy_pre_get_queue_count_url'],
+    'buy_submit_order_url': config_data['url']['buy_submit_order_url']
 }

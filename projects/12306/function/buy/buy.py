@@ -1,12 +1,13 @@
-import json, tools.cookie_tool as cookie_tool
+import json
 from tools.session_tool import session
 from domain.url_data import url_data
 from domain.headers_data import headers_data
 from domain.buy_pre_submit_order_data import buy_pre_submit_order_data
-from domain.buy_pre_get_passenger_info_data import buy_pre_get_passenger_info_data
-from domain.buy_pre_check_order_info_data import buy_pre_check_order_info_data
-from domain.buy_pre_get_queue_count_data import buy_pre_get_queue_count_data
+from domain import buy_pre_get_passenger_info_data as passenger_info_data
+from domain import buy_pre_check_order_info_data as order_info_data
+from domain import buy_pre_get_queue_count_data as queue_count_data
 from domain.buy_pre_buy_select_seat_init_dc_data import buy_pre_buy_select_seat_init_dc_data
+from domain.buy_submit_order import buy_submit_order_data
 from tools import post_data_to_url_tool
 from tools.file_tool import write_content_to_file
 from tools.analy_key_tool import analy_init_dc, analy_passenger_key
@@ -22,6 +23,7 @@ class buy:
         self.buy_pre_check_order_info_url = url_data.get('buy_pre_check_order_info_url')
         self.buy_pre_get_passenger_info_url = url_data.get('buy_pre_get_passenger_info_url')
         self.buy_pre_get_queue_count_url = url_data.get('buy_pre_get_queue_count_url')
+        self.buy_submit_order_url = url_data.get('buy_submit_order_url')
 
     # 预订车票
     def pre_buy_submit_order(self):
@@ -59,7 +61,7 @@ class buy:
             print('预订选座失败')
 
     def buy_pre_get_passenger_info(self):
-        response = session.post(self.buy_pre_get_passenger_info_url, headers=headers_data, data=buy_pre_get_passenger_info_data)
+        response = session.post(self.buy_pre_get_passenger_info_url, headers=headers_data, data=passenger_info_data.get_passenger_info_data())
         if response.status_code == 200:
             try:
                 res_data = json.loads(response.text)
@@ -85,7 +87,7 @@ class buy:
 
     # 校验订单信息是否有效
     def buy_pre_get_check_order_info(self):
-        response = session.post(self.buy_pre_check_order_info_url, headers=headers_data, data=buy_pre_check_order_info_data)
+        response = session.post(self.buy_pre_check_order_info_url, headers=headers_data, data=order_info_data.get_order_info_data())
         if response.status_code == 200:
             try:
                 res_data = json.loads(response.text)
@@ -106,7 +108,29 @@ class buy:
 
     # 查询余座信息
     def buy_pre_get_queue_count(self):
-        response = session.post(self.buy_pre_get_queue_count_url, headers=headers_data, data=buy_pre_get_queue_count_data)
+        response = session.post(self.buy_pre_get_queue_count_url, headers=headers_data, data=queue_count_data.buy_pre_get_queue_count_data_get())
+        if response.status_code == 200:
+            try:
+                res_data = json.loads(response.text)
+            except Exception as e:
+                # 出现异常，抛出错误
+                print('账号异常')
+                file_error = open('config/error.html', 'w', encoding='UTF-8')
+                file_error.write(response.text)
+                file_error.close()
+                print(e)
+            else:
+                if res_data['status']:
+                    print('查询余座信息成功')
+                else:
+                    print('查询余座信息失败')
+                    print(res_data)
+        else:
+            print('查询余座信息失败')
+
+    # 提交购票订单
+    def submit_order(self):
+        response = session.post(self.buy_submit_order_url, headers=headers_data, data=buy_submit_order_data())
         if response.status_code == 200:
             try:
                 res_data = json.loads(response.text)
@@ -132,3 +156,4 @@ class buy:
         self.buy_pre_get_passenger_info()
         self.buy_pre_get_check_order_info()
         self.buy_pre_get_queue_count()
+        self.submit_order()
