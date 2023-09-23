@@ -30,6 +30,12 @@ def write_cookie(cookie_info, is_first=False):
     file_write.close()
 
 
+def set_cookie(response, is_first=False):
+    if 'Set-Cookie' in response.headers:
+        need_set_cookie = response.headers['Set-Cookie']
+        write_cookie(need_set_cookie, is_first)
+
+
 # 读 cookie 函数
 def load_cookie():
     # 定义存放 cookie 的字典

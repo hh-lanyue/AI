@@ -32,8 +32,7 @@ class login:
             else:
                 # 如果没有异常且成功，则保存 cookie
                 if res_data['result_code'] == 0:
-                    set_cookie = response.headers['Set-Cookie']
-                    cookie_tool.write_cookie(set_cookie, is_first=True)
+                    cookie_tool.set_cookie(response, is_first=True)
                     print('登录前校验通过')
                 else:
                     print('登录前校验未通过：', res_data)
@@ -55,8 +54,7 @@ class login:
                 # 如果没有异常且成功，则保存 cookie
                 if res_data['result_code'] == 0:
                     print('登录成功')
-                    set_cookie = response.headers['Set-Cookie']
-                    cookie_tool.write_cookie(set_cookie)
+                    cookie_tool.set_cookie(response)
                 else:
                     print('登录失败：', response.text)
         else:
@@ -70,8 +68,7 @@ class login:
         response = session.get(redirect_url, headers=headers_data)
         if response.ok:
             print('登录成功')
-            set_cookie = response.headers['Set-Cookie']
-            cookie_tool.write_cookie(set_cookie)
+            cookie_tool.set_cookie(response)
         else:
             print('登录失败')
 

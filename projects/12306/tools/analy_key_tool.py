@@ -39,20 +39,21 @@ def analy_init_dc():
     try:
         file_tool.write_content_to_file(config_path.global_token, get_global_repeat_submit_token(), is_cls=True)
         file_tool.write_content_to_file(config_path.ticket_form, get_ticket_info_for_passenger_form(), is_cls=True)
-    except Exception:
-        print('解析 init_dc 失败，用户未登录')
+    except Exception as e:
+        print('解析 init_dc 失败-用户登录失效')
+        print(e)
 
 
 def analy_passenger_key(passenger_data):
     try:
         config_data = config.read_yaml(root_path + '\\' + "config\\config.yaml")
-        user_name = config_data['query']['user_name']
+        user_name = config_data['custom']['user_name']
         passenger_list_info = passenger_data['data']['normal_passengers']
         for passenger_info in passenger_list_info:
             if passenger_info['passenger_name'] == user_name:
                 file_tool.write_content_to_file(config_path.passenger_key, json.dumps(passenger_info), is_cls=True)
     except Exception as e:
-        print('解析 乘客密钥 失败，用户未登录')
+        print('解析乘客密钥失败-用户登录失效')
         print(e)
 
 
@@ -74,6 +75,6 @@ def analy_ticket_form_to_obj():
     try:
         result_data = json.loads(json_data)
     except Exception as e:
-        print('解析 车票信息 失败，用户未登录')
+        print('解析车票信息失败-用户登录失效')
         print(e)
     return result_data

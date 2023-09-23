@@ -17,9 +17,13 @@ def get_train_key():
     return train_key
 
 
-def record_train_list(message):
+def record_train_list(train_item, is_cls=False):
+    if is_cls:
+        mode = 'w'
+    else:
+        mode = 'a'
     # 记录错误信息
-    file_write = open(config_path.file_train_list, 'a', encoding='UTF-8')
-    file_write.write(message)
+    file_write = open(config_path.file_train_list, mode, encoding='UTF-8')
+    file_write.write(train_item)
     file_write.write('\n')
     file_write.close()

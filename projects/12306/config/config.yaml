@@ -26,14 +26,24 @@ login:
   # appid
   appid: 'otn'
 
-# 查询
-query:
+# 自定义购票属性
+custom:
   # 出发日期
   train_date: '2023-09-25'
+  # 出发站
   from_station: 'SJP'
+  # 到达站
   to_station: 'BXP'
-  purpose_codes: 'ADULT'
+  # 乘车人
   user_name: '胡海'
+  # 座位类型
+  # 一等座-M、二等座-O
+  seat_type: 'M'
+  # 车票类型
+  # 1-成人票、2-儿童票、4-残军票
+  ticket_type: '1'
+  # 乘车人类型-成年人
+  purpose_codes: 'ADULT'
 
 # 购买信息
 buy:
