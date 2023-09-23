@@ -1,11 +1,11 @@
 import json
-
+import sys
 from tools import cookie_tool, error_tools, analy_key_tool, post_data_to_url_tool
 from tools.session_tool import session
 from domain.url_data import url_data
 from domain.headers_data import headers_data
 from domain.buy_pre_submit_order_data import get_pre_submit_order_data
-from domain import buy_pre_get_passenger_info_data as passenger_info_data, buy_pre_submit_order_data
+from domain import buy_pre_get_passenger_info_data as passenger_info_data
 from domain import buy_pre_check_order_info_data as order_info_data
 from domain import buy_pre_get_queue_count_data as queue_count_data
 from domain.buy_pre_buy_select_seat_init_dc_data import buy_pre_buy_select_seat_init_dc_data
@@ -25,6 +25,15 @@ class buy:
         self.buy_pre_get_passenger_info_url = url_data.get('buy_pre_get_passenger_info_url')
         self.buy_pre_get_queue_count_url = url_data.get('buy_pre_get_queue_count_url')
         self.buy_submit_order_url = url_data.get('buy_submit_order_url')
+        # 判断程序是否继续执行
+        self.is_continue= True
+
+    # 判断程序是否继续执行
+    def jud_is_continue(self, is_reset=False, is_continue_flag=True):
+        if is_reset:
+            self.is_continue = is_continue_flag
+        if not is_continue_flag or not self.is_continue:
+            sys.exit()
 
     # 预订车票
     def buy_pre_submit_order(self):
@@ -37,17 +46,19 @@ class buy:
                 res_data = json.loads(response.text)
             except Exception as e:
                 # 出现异常，抛出错误
+                self.jud_is_continue(is_reset=True, is_continue_flag=False)
+                error_tools.record_error(response.text, e)
                 print('账号异常')
-                error_tools.record_error(response.text)
-                print(e)
             else:
                 if res_data['status']:
                     cookie_tool.set_cookie(response)
                     print('开始预订购票成功')
                 else:
+                    self.jud_is_continue(is_reset=True, is_continue_flag=False)
                     print('开始预订购票失败--用户登录失效')
-                    print(res_data)
+                    error_tools.record_error(response.text)
         else:
+            self.jud_is_continue(is_reset=True, is_continue_flag=False)
             print('开始预订购票失败--网络请求失败')
 
     # 获取车票信息
@@ -61,8 +72,10 @@ class buy:
             if analy_key_tool.analy_global_token_to_obj() != '':
                 print('获取车票信息成功')
             else:
+                self.jud_is_continue(is_reset=True, is_continue_flag=False)
                 print('获取车票信息失败-用户登录失效')
         else:
+            self.jud_is_continue(is_reset=True, is_continue_flag=False)
             print('获取车票信息失败-网络请求失败')
 
     # 获取乘客信息
@@ -73,9 +86,9 @@ class buy:
                 res_data = json.loads(response.text)
             except Exception as e:
                 # 出现异常，抛出错误
-                error_tools.record_error(response.text)
+                self.jud_is_continue(is_reset=True, is_continue_flag=False)
+                error_tools.record_error(response.text, e)
                 print('账号异常')
-                print(e)
             else:
                 if res_data['status']:
                     cookie_tool.set_cookie(response)
@@ -83,12 +96,15 @@ class buy:
                         analy_passenger_key(res_data)
                         print('获取乘客信息成功')
                     else:
-                        print(res_data['data']['exMsg'])
+                        self.jud_is_continue(is_reset=True, is_continue_flag=False)
+                        error_tools.record_error(response.text)
                         print('获取乘客信息失败-用户登录失效')
                 else:
-                    print(res_data)
+                    self.jud_is_continue(is_reset=True, is_continue_flag=False)
+                    error_tools.record_error(response.text)
                     print('获取乘客信息失败-网络请求失败')
         else:
+            self.jud_is_continue(is_reset=True, is_continue_flag=False)
             print('获取乘客信息失败-网络请求失败')
 
     # 校验订单信息是否有效
@@ -99,15 +115,18 @@ class buy:
                 res_data = json.loads(response.text)
             except Exception as e:
                 # 出现异常，抛出错误
-                error_tools.record_error(response.text)
-                print(e)
+                self.jud_is_continue(is_reset=True, is_continue_flag=False)
+                error_tools.record_error(response.text, e)
                 print('账号异常')
             else:
                 if res_data['status']:
                     print('校验订单信息成功')
                 else:
+                    self.jud_is_continue(is_reset=True, is_continue_flag=False)
+                    error_tools.record_error(response.text)
                     print('校验订单信息失败-用户登录失效')
         else:
+            self.jud_is_continue(is_reset=True, is_continue_flag=False)
             print('校验订单信息失败-网络请求失败')
 
     # 获取余票信息
@@ -118,17 +137,19 @@ class buy:
                 res_data = json.loads(response.text)
             except Exception as e:
                 # 出现异常，抛出错误
-                error_tools.record_error(response.text)
+                self.jud_is_continue(is_reset=True, is_continue_flag=False)
+                error_tools.record_error(response.text, e)
                 print('账号异常')
-                print(e)
             else:
                 if res_data['status']:
                     cookie_tool.set_cookie(response)
-                    print('获取余票信息成功-')
+                    print('获取余票信息成功')
                 else:
-                    print(res_data)
+                    self.jud_is_continue(is_reset=True, is_continue_flag=False)
+                    error_tools.record_error(response.text)
                     print('获取余票信息失败-用户登录失效')
         else:
+            self.jud_is_continue(is_reset=True, is_continue_flag=False)
             print('获取余票信息失败-网络请求失败')
 
     # 提交订单
@@ -139,17 +160,19 @@ class buy:
                 res_data = json.loads(response.text)
             except Exception as e:
                 # 出现异常，抛出错误
-                error_tools.record_error(response.text)
+                self.jud_is_continue(is_reset=True, is_continue_flag=False)
+                error_tools.record_error(response.text, e)
                 print('账号异常')
-                print(e)
             else:
                 if res_data['status']:
                     cookie_tool.set_cookie(response)
                     print('提交订单成功')
                 else:
-                    print(res_data)
+                    self.jud_is_continue(is_reset=True, is_continue_flag=False)
+                    error_tools.record_error(response.text)
                     print('提交订单失败-用户登录失效')
         else:
+            self.jud_is_continue(is_reset=True, is_continue_flag=False)
             print('提交订单失败-网络请求失败')
 
     def init_buy(self):
@@ -158,4 +181,4 @@ class buy:
         self.buy_pre_get_passenger_info()
         self.buy_pre_get_check_order_info()
         self.buy_pre_get_queue_count()
-        # self.submit_order()
+        self.submit_order()

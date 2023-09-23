@@ -1,4 +1,5 @@
 import json, tools.cookie_tool as cookie_tool, tools.error_tools as error_tools
+import sys
 from tools.session_tool import session
 from domain.url_data import url_data
 from domain.headers_data import headers_data
@@ -15,29 +16,40 @@ class login:
         self.login_url = url_data.get('login_url')
         # 用户登录地址
         self.user_login_url = url_data.get('user_login_url')
+        # 判断程序是否继续执行
+        self.is_continue = True
+
+    # 判断程序是否继续执行
+    def jud_is_continue(self, is_reset=False, is_continue_flag=True):
+        if is_reset:
+            self.is_continue = is_continue_flag
+        if not is_continue_flag or not self.is_continue:
+            sys.exit()
 
     # 登录前校验
     def pre_login(self):
         # 发送登录请求
         response = session.post(self.check_url, headers=headers_data, data=pre_login_data)
-
         if response.status_code == 200:
             try:
                 res_data = json.loads(response.text)
             except Exception as e:
                 # 出现异常，抛出错误
+                self.jud_is_continue(is_reset=True, is_continue_flag=False)
+                error_tools.record_error(response.text, e)
                 print('账号异常')
-                error_tools.record_error(response.text)
-                print(e)
             else:
                 # 如果没有异常且成功，则保存 cookie
                 if res_data['result_code'] == 0:
                     cookie_tool.set_cookie(response, is_first=True)
-                    print('登录前校验通过')
+                    print('登录前校验成功')
                 else:
-                    print('登录前校验未通过：', res_data)
+                    self.jud_is_continue(is_reset=True, is_continue_flag=False)
+                    error_tools.record_error(response.text)
+                    print('登录前校验失败-账号密码错误或账号状态异常')
         else:
-            print('登录前校验未通过')
+            self.jud_is_continue(is_reset=True, is_continue_flag=False)
+            print('登录前校验失败-网络请求失败')
 
     def do_login(self):
         # 发送登录请求
@@ -47,30 +59,38 @@ class login:
                 res_data = json.loads(response.text)
             except Exception as e:
                 # 出现异常，抛出错误
-                print('账号异常')
+                self.jud_is_continue(is_reset=True, is_continue_flag=False)
                 error_tools.record_error(response.text)
-                print(e)
+                print('账号异常', e)
             else:
                 # 如果没有异常且成功，则保存 cookie
                 if res_data['result_code'] == 0:
-                    print('登录成功')
                     cookie_tool.set_cookie(response)
+                    print('登录成功')
                 else:
-                    print('登录失败：', response.text)
+                    self.jud_is_continue(is_reset=True, is_continue_flag=False)
+                    error_tools.record_error(response.text)
+                    print('登录失败-账号密码错误或账号状态异常')
         else:
-            print('登录失败')
+            self.jud_is_continue(is_reset=True, is_continue_flag=False)
+            print('登录失败-网络请求失败')
 
     def user_login(self):
         # 发送登录请求，会引发重定向
         response = session.get(url=self.user_login_url, headers=headers_data)
-        # 获取重定向地址
-        redirect_url = response.url
-        response = session.get(redirect_url, headers=headers_data)
-        if response.ok:
-            print('登录成功')
-            cookie_tool.set_cookie(response)
+        if response.status_code == 200:
+            # 获取重定向地址
+            redirect_url = response.url
+            response = session.get(redirect_url, headers=headers_data)
+            if response.status_code == 200:
+                cookie_tool.set_cookie(response)
+                print('登录成功')
+            else:
+                self.jud_is_continue(is_reset=True, is_continue_flag=False)
+                print('登录失败-网络请求失败')
         else:
-            print('登录失败')
+            self.jud_is_continue(is_reset=True, is_continue_flag=False)
+            print('登录失败-网络请求失败')
 
     def init_login(self):
         self.pre_login()
