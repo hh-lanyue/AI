@@ -23,11 +23,13 @@ class login:
     def jud_is_continue(self, is_reset=False, is_continue_flag=True):
         if is_reset:
             self.is_continue = is_continue_flag
-        if not is_continue_flag or not self.is_continue:
-            sys.exit()
+        else:
+            if not is_reset and not self.is_continue:
+                sys.exit()
 
     # 登录前校验
     def pre_login(self):
+        self.jud_is_continue()
         # 发送登录请求
         response = session.post(self.check_url, headers=headers_data, data=pre_login_data)
         if response.status_code == 200:
@@ -52,6 +54,7 @@ class login:
             print('登录前校验失败-网络请求失败')
 
     def do_login(self):
+        self.jud_is_continue()
         # 发送登录请求
         response = session.post(self.login_url, headers=headers_data, data=login_data)
         if response.status_code == 200:
@@ -76,6 +79,7 @@ class login:
             print('登录失败-网络请求失败')
 
     def user_login(self):
+        self.jud_is_continue()
         # 发送登录请求，会引发重定向
         response = session.get(url=self.user_login_url, headers=headers_data)
         if response.status_code == 200:

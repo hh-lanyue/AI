@@ -8,9 +8,6 @@ from domain.headers_data import headers_data
 from domain.get_tickets_data import get_tickets_data
 
 
-config_data = config.read_yaml(root_path + '\\' + "config\\config.yaml")
-
-
 class query_tickets:
     # 构造函数
     def __init__(self):
@@ -23,11 +20,13 @@ class query_tickets:
     def jud_is_continue(self, is_reset=False, is_continue_flag=True):
         if is_reset:
             self.is_continue = is_continue_flag
-        if not is_continue_flag or not self.is_continue:
-            sys.exit()
+        else:
+            if not is_reset and not self.is_continue:
+                sys.exit()
 
     # 登录前校验
     def get_tickets(self):
+        self.jud_is_continue()
         # 发送登录请求
         response = session.get(self.query_ticket_url, headers=headers_data, params=get_tickets_data)
         if response.status_code == 200:
@@ -43,6 +42,7 @@ class query_tickets:
                 if res_data['status'] and res_data['httpstatus'] == 200:
                     if res_data['data']['flag'] == '1':
                         # 获取到需要购买的车次号
+                        config_data = config.read_yaml(root_path + '\\' + "config\\config.yaml")
                         station_train_code = config_data['custom']['station_train_code']
                         train_list = res_data['data']['result']
                         for train_index, train_item in enumerate(train_list):
