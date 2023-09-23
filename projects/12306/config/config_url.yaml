@@ -1,0 +1,25 @@
+# 请求地址
+url:
+  # 获取东八区北京时间的 url
+  beijing_time_url: 'https://www.beijing-time.org/time.asp'
+  # 获取全国各地火车站的
+  city_code_dict_url: 'https://kyfw.12306.cn/otn/resources/js/framework/station_name.js'
+  check_url: 'https://kyfw.12306.cn/passport/web/checkLoginVerify'
+  login_url: 'https://kyfw.12306.cn/passport/web/login'
+  user_login_url: 'https://kyfw.12306.cn/otn/login/userLogin'
+  query_ticket_url: 'https://kyfw.12306.cn/otn/leftTicket/queryZ'
+  buy_pre_submit_order_url: 'https://kyfw.12306.cn/otn/leftTicket/submitOrderRequest'
+  buy_pre_buy_select_seat_init_dc_url: 'https://kyfw.12306.cn/otn/confirmPassenger/initDc'
+  buy_pre_get_passenger_info_url: 'https://kyfw.12306.cn/otn/confirmPassenger/getPassengerDTOs'
+  buy_pre_check_order_info_url: 'https://kyfw.12306.cn/otn/confirmPassenger/checkOrderInfo'
+  buy_pre_get_queue_count_url: 'https://kyfw.12306.cn/otn/confirmPassenger/getQueueCount'
+  buy_submit_order_url: 'https://kyfw.12306.cn/otn/confirmPassenger/confirmSingleForQueue'
+
+# 请求头
+headers:
+  Connection: 'keep-alive'
+  # 尽量别用这个
+  # Content-Type: 'application/json; charset=UTF-8'
+  # 优先使用这个
+  Content-Type: 'application/x-www-form-urlencoded; charset=UTF-8'
+  User-Agent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36'

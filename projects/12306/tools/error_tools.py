@@ -1,4 +1,5 @@
 from config import config_path
+from tools import global_variable_manger_tool as global_manger
 
 
 # 记录错误信息

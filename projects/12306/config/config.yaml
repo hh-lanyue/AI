@@ -1,25 +1,3 @@
-# 请求地址
-url:
-  check_url: 'https://kyfw.12306.cn/passport/web/checkLoginVerify'
-  login_url: 'https://kyfw.12306.cn/passport/web/login'
-  user_login_url: 'https://kyfw.12306.cn/otn/login/userLogin'
-  query_ticket_url: 'https://kyfw.12306.cn/otn/leftTicket/queryZ'
-  buy_pre_submit_order_url: 'https://kyfw.12306.cn/otn/leftTicket/submitOrderRequest'
-  buy_pre_buy_select_seat_init_dc_url: 'https://kyfw.12306.cn/otn/confirmPassenger/initDc'
-  buy_pre_get_passenger_info_url: 'https://kyfw.12306.cn/otn/confirmPassenger/getPassengerDTOs'
-  buy_pre_check_order_info_url: 'https://kyfw.12306.cn/otn/confirmPassenger/checkOrderInfo'
-  buy_pre_get_queue_count_url: 'https://kyfw.12306.cn/otn/confirmPassenger/getQueueCount'
-  buy_submit_order_url: 'https://kyfw.12306.cn/otn/confirmPassenger/confirmSingleForQueue'
-
-# 请求头
-headers:
-  Connection: 'keep-alive'
-  # 尽量别用这个
-  # Content-Type: 'application/json; charset=UTF-8'
-  # 优先使用这个
-  Content-Type: 'application/x-www-form-urlencoded; charset=UTF-8'
-  User-Agent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36'
-
 # 登录信息
 login:
   # 用户名
@@ -28,21 +6,22 @@ login:
   password: 'lanyue0910'
   # appid
   appid: 'otn'
-
 # 自定义购票属性
 custom:
   # 乘车人
-  user_name: '胡海'
+  user_name: '胡淋婧'
   # 出发日期
   train_date: '2023-10-07'
+  # 车票发售时间
+  ticket_sale_time: '2023-09-23 23:15:00'
   # 出发站
-  query_from_station_name: '阜新'
-  from_station: 'FOT'
+  query_from_station_name: '高平东'
+  from_station: 'GVF'
   # 到达站
-  query_to_station_name: '北京'
-  to_station: 'IFP'
+  query_to_station_name: '石家庄'
+  to_station: 'SJP'
   # 车次号
-  station_train_code: 'G930'
+  station_train_code: 'G684'
   # 座位类型
   # 一等座-M、二等座-O
   seat_type: 'O'
