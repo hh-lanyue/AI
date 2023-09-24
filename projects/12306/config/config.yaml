@@ -13,7 +13,7 @@ custom:
   # 出发日期
   train_date: '2023-10-08'
   # 车票发售时间
-  ticket_sale_time: '2023-09-24 17:00:00'
+  ticket_sale_time: '2023-09-24 14:41:00'
   # 出发站
   query_from_station_name: '高平东'
   from_station: 'GVF'

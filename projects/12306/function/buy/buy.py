@@ -1,6 +1,7 @@
 import json
 from tools import cookie_tool, error_tools, analy_key_tool, post_data_to_url_tool
 from tools.session_tool import session
+from tools import time_tool
 from tools import global_variable_manger_tool as global_manger
 from domain.url_data import url_data
 from domain.url_data import headers_data

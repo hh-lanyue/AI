@@ -6,6 +6,7 @@ from domain.url_data import url_data, headers_data
 from config import config
 from root.root_path import root_path
 from tools import error_tools
+from tools import global_variable_manger_tool as global_manger
 
 
 config_data = config.read_yaml(root_path + '\\' + "config\\config.yaml")
@@ -112,7 +113,7 @@ def get_buy_ticket_diff(time_mode='net'):
 # 判断是否开始抢票
 def is_begin_buy_ticket(time_mode='net'):
     time_diff_seconds, _ = get_buy_ticket_diff(time_mode=time_mode)
-    if time_diff_seconds <= 0:
+    if time_diff_seconds <= global_manger.get_global_value(item_key='mistake'):
         return True
     else:
         return False
