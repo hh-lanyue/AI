@@ -1,5 +1,3 @@
-import sys
-
 global_dict = {}
 
 
@@ -11,7 +9,7 @@ def init_global_dict():
     global_dict['max_buy_times_no_change'] = 5
 
 
-def set_global_value(item_value, item_key='is_continue'):
+def set_global_value(item_key, item_value):
     global global_dict
     global_dict[item_key] = item_value
 
@@ -27,7 +25,7 @@ def get_global_value(item_key='is_continue'):
 # 判断程序是否继续执行
 def jud_is_continue(is_reset=False, is_continue_flag=True):
     if is_reset:
-        set_global_value(is_continue_flag)
+        set_global_value(item_key='is_continue', item_value=is_continue_flag)
     else:
         if not is_reset and not get_global_value():
             return

@@ -1,7 +1,9 @@
 # 请求地址
 url:
   # 获取东八区北京时间的 url
-  beijing_time_url: 'https://www.beijing-time.org/time.asp'
+  # beijing_time_url: 'https://www.beijing-time.org/time.asp'
+  # 淘宝时间
+  beijing_time_url: 'http://api.m.taobao.com/rest/api3.do'
   # 获取全国各地火车站的
   city_code_dict_url: 'https://kyfw.12306.cn/otn/resources/js/framework/station_name.js'
   check_url: 'https://kyfw.12306.cn/passport/web/checkLoginVerify'
