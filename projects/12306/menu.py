@@ -27,7 +27,7 @@ def buy_ticket():
         # 如果没有到车票发售时间则一直循环等待
         while not time_tool.is_begin_buy_ticket(time_mode='net'):
             time_diff, time_wait = time_tool.get_buy_ticket_diff(time_mode='net')
-            print('当前时刻 ', time_tool.curr_time(), '距离车票发售时间还有 ', time_diff, ' 秒，程序继续休眠 ', time_wait, '秒')
+            print('当前时刻 ', time_tool.curr_time(mode='net'), '距离车票发售时间还有 ', time_diff, ' 秒，程序继续休眠 ', time_wait, '秒')
             time.sleep(time_wait)
         # 统计购票次数
         global_manger.set_global_value(item_key='max_buy_times', item_value=global_manger.get_global_value('max_buy_times') - 1)

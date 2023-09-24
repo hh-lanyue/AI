@@ -12,8 +12,11 @@ config_data = config.read_yaml(root_path + '\\' + "config\\config.yaml")
 curr_date = str(datetime.datetime.now().date())
 
 
-def curr_time():
-    return str(datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
+def curr_time(mode='local'):
+    if mode == 'local':
+        return str(datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
+    else:
+        return get_beijing_time_net().strftime('%Y-%m-%d %H:%M:%S')
 
 
 # 格林尼治东八区-北京时间
