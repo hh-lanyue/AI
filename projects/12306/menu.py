@@ -31,7 +31,7 @@ def buy_ticket():
             time.sleep(time_wait)
         # 统计购票次数
         global_manger.set_global_value(item_key='max_buy_times', item_value=global_manger.get_global_value('max_buy_times') - 1)
-        print('[第' + str(global_manger.get_global_value('max_buy_times_no_change') - global_manger.get_global_value('max_buy_times')) + '次]当前时刻 ', time_tool.curr_time(), ' 程序开始为您自动化购票, 请稍后......')
+        print('[第' + str(global_manger.get_global_value('max_buy_times_no_change') - global_manger.get_global_value('max_buy_times')) + '次]当前时刻 ', time_tool.curr_time(mode='net'), ' 程序开始为您自动化购票, 请稍后......')
         # 开始购票
         exec_task()
 
