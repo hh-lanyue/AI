@@ -1,6 +1,4 @@
 # python
-*.pyd
-*.log
 node_modules/
 libs/
 lib/
@@ -9,7 +7,18 @@ Scripts/
 log/
 venv/
 __pycache__/
+*.pyd
+*.log
+*.pt
 
 # java
 .idea
 *.class
+
+# 项目专属
+MNIST/
+
+# 通用
+*.png
+*.jpg
+*.gz
