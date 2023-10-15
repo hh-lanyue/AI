@@ -1,0 +1,12 @@
+1 下载 git lfs
+https://git-lfs.com/
+
+2 测试是否安装成功
+git lfs install
+
+3 添加大文件类型
+git lfs track '文件类型'
+【例如】git lfs track '*.pt'
+
+4 查看跟踪的大文件类型
+git lfs ls-files
