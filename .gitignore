@@ -7,9 +7,13 @@ Scripts/
 log/
 venv/
 __pycache__/
+*cache*/
+*.pyc
 *.pyd
 *.log
 *.pt
+*.ckpt
+*.npz
 
 # java
 .idea
