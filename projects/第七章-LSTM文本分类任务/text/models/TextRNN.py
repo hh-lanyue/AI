@@ -21,7 +21,9 @@ class Config(object):
         self.embedding_pretrained = torch.tensor(
             np.load(dataset + '/data/' + embedding)["embeddings"].astype('float32'))\
             if embedding != 'random' else None                                       # 预训练词向量
-        self.device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')   # 设备
+        # self.device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')   # 设备
+        self.device = 'cuda'
+        print('当前使用的设备是：', self.device)
         # 随机失活-随即杀死神经元
         self.dropout = 0.5
         # 若超过 1000 batch效果还没提升，则提前结束训练
